@@ -7,6 +7,8 @@ snake[0] = {  //tamanho da cobrinha
     y: 8 * box
 }
 
+let direction = "right";
+
 function criarBG() {
     context.fillStyle = "lightgreen";
     context.fillRect (0, 0, 16 * box, 16 * box); //cria o retangulo onde vai acontecer o jogo.
@@ -19,5 +21,27 @@ function criarSnake() { //vai percorrer o vetor e acrescentar
     }
 }
 
-criarBG();
-criarSnake();
+function iniciarJogo() {
+    criarBG();
+    criarSnake();
+
+    let snakeX =  snake[0].x;
+    let snakeY = snake[0].y;
+
+    if (direction == "right") snakeX += box; //se a direção da cobra for para a direita, irá acrescentar um quadradinho.
+    if (direction == "left") snakeX -= box;
+    if (direction == "up") snakeY -= box;
+    if (direction == "down") snakeY += box; 
+
+    snake.pop(); //retira o ultimo quadrinho do array
+    
+    let newHead = { //vai acrescrentar quadrinho na frente
+        x: snakeX,
+        y: snakeY
+    }
+
+    snake.unshift(newHead);
+}
+
+
+let jogo = setInterval(iniciarJogo, 100);
