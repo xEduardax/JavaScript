@@ -8,6 +8,10 @@ snake[0] = {  //tamanho da cobrinha
 }
 
 let direction = "right";
+let food = { // cria as comidinhas aleatórias
+    x: Math.floor(Math.random() * 15 + 1) * box,
+    y: Math.floor(Math.random() * 15 + 1) * box
+}
 
 function criarBG() {
     context.fillStyle = "lightgreen";
@@ -21,13 +25,19 @@ function criarSnake() { //vai percorrer o vetor e acrescentar
     }
 }
 
+function drawFood() {
+    context.fillStyle = "red"
+    context.fillRect(food.x, food.y, box, box);
+}
+
+
 document.addEventListener('keydown', update); //evento de escuta
 
 function update (event){ //vai captar os movimentos do teclado
-    if (event.keyCode == 37 && direction != "right") direction = "left"; 
-    if (event.keyCode == 38 && direction != "down") direction = "up";
-    if (event.keyCode == 39 && direction != "left") direction = "right";
-    if (event.keyCode == 40 && direction != "up") direction = "down";
+    if (event.keyCode == 65 && direction != "right") direction = "left"; 
+    if (event.keyCode == 87 && direction != "down") direction = "up";
+    if (event.keyCode == 68 && direction != "left") direction = "right";
+    if (event.keyCode == 83 && direction != "up") direction = "down";
 }
 
 function iniciarJogo() {
@@ -38,6 +48,7 @@ function iniciarJogo() {
 
     criarBG();
     criarSnake();
+    drawFood();
 
     let snakeX =  snake[0].x;
     let snakeY = snake[0].y;
