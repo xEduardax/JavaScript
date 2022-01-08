@@ -58,8 +58,13 @@ function iniciarJogo() {
     if (direction == "up") snakeY -= box;
     if (direction == "down") snakeY += box; 
 
-    snake.pop(); // retira o ultimo quadrinho do array
-    
+    if (snakeX != food.x || snakeY != food.y) {
+        snake.pop(); // retira o ultimo quadrinho do array
+    }else {
+        food.x = Math.floor(Math.random() * 15 + 1) * box;
+        food.y = Math.floor(Math.random() * 15 + 1) * box;
+    }
+
     let newHead = { //vai acrescrentar quadrinho na frente
         x: snakeX,
         y: snakeY
